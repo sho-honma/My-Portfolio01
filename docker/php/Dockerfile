@@ -40,8 +40,8 @@ RUN rm -rf node_modules
 RUN apt-get install -y nodejs 
 RUN npm install -g n --save-dev cross-env
 RUN n stable
-RUN npm cache clear --force
 RUN npm install webpack --save
+RUN npm cache clean --force
 RUN npm install node-sass --nodedir=/usr/bin/node
 
 WORKDIR /var/www/

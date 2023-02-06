@@ -1,5 +1,5 @@
 {
   "config": {
-    "process-timeout": 0
+    "process-timeout": 1200
   }
 }

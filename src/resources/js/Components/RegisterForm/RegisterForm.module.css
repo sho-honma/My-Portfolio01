@@ -1,0 +1,28 @@
+.buttoncontainer {
+    /* height: 200%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.RegisterForm {
+    width: 80%;
+    height: 90%;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.button {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button h2 {
+    width: 80%;
+    height: 50%;
+    /* margin: 0 auto;
+    margin-top: 1.5rem; */
+}

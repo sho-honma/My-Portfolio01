@@ -1,0 +1,64 @@
+.Maincontainer {
+    width: 100%;
+}
+
+.Library {
+    margin: 0;
+    padding: 0;
+    /* width: 94%; */
+    height: 100%;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    height: 5rem;
+    border-top: solid 0.1px rgb(197, 197, 197);
+    background-color: rgb(242, 247, 248);
+}
+.headerleft {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    font-size: 30px;
+}
+.headerright {
+    width: 40%;
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 2rem;
+}
+.containertitle {
+    font-size: 25px;
+    margin-left: 2rem;
+}
+.cardcontainer {
+    background-color: rgb(242, 247, 248);
+    height: 42rem;
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: center; */
+    /* align-content: flex-start; */
+    /* flex-wrap: wrap; */
+}
+
+.card {
+    width: 16rem;
+    height: 18rem;
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+    background-color: #ffff;
+}
+
+.templatecontainer {
+    display: flex;
+    justify-content: space-around;
+}
+.templatecard {
+    width: 35%;
+
+    /* margin: 5rem */
+}

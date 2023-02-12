@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { DatePicker } from "@mantine/dates";
 import classes from "./Registerform.module.css";
 import { useForm } from "@mantine/form";
@@ -21,21 +21,31 @@ export function RegisterForm(props) {
     const [title, setTitle] = useState(props.title);
     const [description, setDescription] = useState(props.description);
     const [slider, setSlider] = useState(50);
-    const [color, setColor] = useState("#25262b");
+    const [value, setColor] = useState("rgba(47, 119, 150, 0.7)");
     const [date, setDate] = useState(new Date());
+    // const newcolor = props.onColor;
+    // console.log(value);
+
+    // useEffect(() => {
+    //     console.log("レンダリング");
+    //     console.log(value);
+    // }, [value]);
+
+    // console.log(value);
     // const [data, Setdata] = useState(props.list);
     // useEffect(() => {
-    //   console.log(title);
+    //     console.log(title);
     // }, [title]);
     // useEffect(() => {
     //   console.log(opened);
     // }, [opened]);
-    console.log(props.color);
+    // console.log(props.color);
+    // console.log(props.onColor);
 
     return (
         <div className={classes.RegisterForm}>
             <div className={classes.button} onClick={() => setOpened(true)}>
-                <h2>{props.title}</h2>
+                <h2 onClick={props.onColor}>{props.title}</h2>
             </div>
 
             <Drawer
@@ -81,29 +91,33 @@ export function RegisterForm(props) {
                     onChange={setDate}
                 />
                 <Stack align="center">
-                    <ColorPicker
-                        format="hex"
-                        value={color}
-                        swatches={[
-                            "#25262b",
-                            "#868e96",
-                            "#fa5252",
-                            "#e64980",
-                            "#be4bdb",
-                            "#7950f2",
-                            "#4c6ef5",
-                            "#228be6",
-                            "#15aabf",
-                            "#12b886",
-                            "#40c057",
-                            "#82c91e",
-                            "#fab005",
-                            "#fd7e14",
-                        ]}
-                    />
-                    <Text>{color}</Text>
+                    <Stack align="center">
+                        <ColorPicker
+                            format="rgba"
+                            value={value}
+                            onChange={setColor}
+                            swatches={[
+                                "#25262b",
+                                "#868e96",
+                                "#fa5252",
+                                "#e64980",
+                                "#be4bdb",
+                                "#7950f2",
+                                "#4c6ef5",
+                                "#228be6",
+                                "#15aabf",
+                                "#12b886",
+                                "#40c057",
+                                "#82c91e",
+                                "#fab005",
+                                "#fd7e14",
+                            ]}
+                        />
+                        <Text>{value}</Text>
+                    </Stack>
+                    {/* <Text>{color}</Text> */}
                 </Stack>
-                <button>保存</button>
+                <button onClick={props.onColor(value)}>保存</button>
             </Drawer>
         </div>
     );

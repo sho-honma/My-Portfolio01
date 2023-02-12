@@ -1,6 +1,12 @@
 .Maincontainer {
     width: 100%;
 }
+@media (prefers-color-scheme: dark) {
+    .Maincontainer {
+        background-color: rgb(38, 42, 42);
+        color: #fff;
+    }
+}
 
 .Library {
     margin: 0;

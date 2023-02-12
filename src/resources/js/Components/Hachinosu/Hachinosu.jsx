@@ -1,6 +1,6 @@
 import classes from "./Hachinosu.module.css";
-import { useState, useEffect } from "react";
-import { RegisterForm } from "../Registerform/Registerform";
+import { useState, useEffect, memo } from "react";
+import { RegisterForm } from "../RegisterForm/RegisterForm";
 import { Button } from "@mantine/core";
 // import datas from "../../data.json";
 export default function Hachinosu(props) {
@@ -80,7 +80,7 @@ export default function Hachinosu(props) {
             id: 12,
             title: "wwwwwww",
             description: "llllllllllll",
-            color: "red",
+            color: "green",
         },
         {
             id: 13,
@@ -116,6 +116,48 @@ export default function Hachinosu(props) {
 
             <div className={classes.grid}>
                 {lists.map((list) => {
+                    const data = "123";
+                    // const color = `backgroundColor:"${list.color}"`;
+                    const [color, setColor] = useState({
+                        backgroundColor: list.color,
+                    });
+                    const [newcolor, setNewcolor] = useState(list.color);
+                    // console.log(newcolor);
+                    useEffect(() => {
+                        // setNewcolor;
+                        setColor({
+                            backgroundColor: newcolor,
+                        });
+                        console.log(color);
+                    }, [newcolor]);
+
+                    // useEffect(() => {
+                    //     setColor(newcolor);
+                    // }, [newcolor]);
+                    // console.log(newcolor);
+
+                    // setColor({
+                    //     backgroundColor: "yellow",
+                    // });
+
+                    // const [color, setColor] = useState("bule";
+                    // const [color, setColor] = useState(list.color);
+                    // console.log(color);
+
+                    // const ppcolor = { 'backgroundColor: ${ newcolor }' };
+                    // useEffect(() => {
+                    //     setNewcolor(() => {
+                    //         `backgroundColor:"${color}"`;
+                    //     });
+                    //     console.log(newcolor);
+                    // }, []);
+                    // console.log(`backgroundColor:"${color}"`);
+
+                    // console.log(newcolor);
+                    // console.log("rennder");
+                    // useEffect(() => {
+                    //     setColor();
+                    // }, [color, setColor]);
                     return (
                         <div className={classes.grid__item} key={list.id}>
                             <div className={classes.grid__gutter}>
@@ -136,7 +178,19 @@ export default function Hachinosu(props) {
                                                     className={
                                                         classes.hexagon__inner_image
                                                     }
-                                                    // style={{ backgroundColor: { color } }}
+                                                    // onClick={() =>
+                                                    //     setColor({
+                                                    //         backgroundColor:
+                                                    //             newcolor,
+                                                    //     })
+                                                    // }
+                                                    style={
+                                                        // ppcolor
+                                                        // backgroundColor: "red",
+                                                        // `backgroundColor:${color}`
+                                                        color
+                                                    }
+                                                    // {{ newcolor }}
                                                 >
                                                     <RegisterForm
                                                         opened={opened}
@@ -148,6 +202,7 @@ export default function Hachinosu(props) {
                                                         description={
                                                             list.description
                                                         }
+                                                        onColor={setNewcolor}
                                                         // color={colorhandler}
                                                     />
                                                 </div>

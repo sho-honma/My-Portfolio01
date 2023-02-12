@@ -11,7 +11,6 @@ import {
     Modal,
     useMantineTheme,
 } from "@mantine/core";
-import { Template } from "../Template/Template";
 
 export function Library(props) {
     const [opened, SetOpened] = useState(false);
@@ -105,6 +104,17 @@ export function Library(props) {
                             >
                                 編集する
                             </Button>
+                            <Button
+                                className={classes.editbutton}
+                                variant="light"
+                                color="red"
+                                fullWidth
+                                mt="md"
+                                radius="md"
+                                onClick={props.Onstart}
+                            >
+                                削除する
+                            </Button>
                         </Card>
                     );
                 })}
@@ -126,7 +136,10 @@ export function Library(props) {
                 <div className={classes.templatecontainer}>
                     {templates.map((template) => {
                         return (
-                            <div className={classes.templatecard}>
+                            <div
+                                className={classes.templatecard}
+                                key={template.title}
+                            >
                                 <Card shadow="sm" p="lg" radius="md" withBorder>
                                     <Card.Section>
                                         <Image

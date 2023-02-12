@@ -1,7 +1,7 @@
 import classes from "./Maincontainer.module.css";
 import { useEffect, useState, memo } from "react";
-// import { Library } from "../Library/Library";
-// import Hachinosu from "../Hacchinosu/Hachinosu";
+import { Library } from "../Library/Library";
+import Hachinosu from "../Hachinosu/Hachinosu";
 
 export function Maincontainer() {
     const [isEditing, setEditing] = useState(true);

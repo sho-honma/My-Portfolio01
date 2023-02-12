@@ -1,5 +1,8 @@
 import classes from "./Sidebar.module.css";
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import Dropdown from "@/Components/Dropdown";
+
 import {
     Drawer,
     Button,
@@ -41,10 +44,10 @@ export function Sidebar() {
                 overlayOpacity={0.55}
                 overlayBlur={3}
             >
-                <h2>Power Frame</h2>
-                <h3>ホーム</h3>
-                <h3>ログアウト</h3>
-                <h3>お問い合わせ</h3>
+                <Link href="/">ホーム</Link>
+                <Dropdown.Link href={route("logout")} method="post" as="button">
+                    ログアウト
+                </Dropdown.Link>
             </Drawer>
         </div>
     );

@@ -25,7 +25,14 @@ use Inertia\Inertia;
 // Route::get('/book',[WorksController::class,'detail_read']);
 // Route::post('/make',[WorksController::class,'work_make']);
 // Route::patch('/update',[WorksController::class,'detail_update']);
-
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/', function () {

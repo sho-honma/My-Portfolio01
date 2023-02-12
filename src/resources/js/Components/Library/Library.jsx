@@ -52,10 +52,66 @@ export function Library(props) {
             status: false,
         },
     ];
+    const [lists, setLists] = useState([]);
+    const [datas, setDatas] = useState([]);
+    const [updates, setUpdate] = useState([]);
+    const [deletenum, setDeletenum] = useState(0);
+    const [responses, setResponse] = useState([]); // console.log(responses);
+    useEffect(() => {
+        axios
+            .post("/dashboard/read", {
+                user_id: props.auth.user.id,
+            })
+            .then(function (response) {
+                setLists(response.data);
+                console.log(lists);
+            })
+            .catch((error) => console.log(error));
+    }, [datas]);
+    // #削除
+    const work_delete = (num) => {
+        axios
+            .post("/dashboard/delete", {
+                id: num,
+            })
+            .then(function (response) {
+                setDatas(response.data);
+                console.log(datas);
+            })
+            .catch((error) => console.log(error));
+    };
+    // #新規作成
+    const work_create = () => {
+        axios
+            .post("/dashboard/create", {
+                user_id: props.auth.user.id,
+                item_title: "新作",
+            })
+            .then(function (response) {
+                setResponse(response.data);
+                console.log(responses);
+            })
+            .catch((error) => console.log(error));
+    };
+    // #編集
+    const work_edit = (num) => {
+        axios
+            .post("/dashboard/edit", {
+                work_id: num,
+            })
+            .then(function (response) {
+                setResponse(response.data);
+                console.log(responses);
+            })
+            .catch((error) => console.log(error));
+    };
     return (
         <div className={classes.Library}>
             <div className={classes.header}>
                 <div className={classes.headerleft}>過去の作品一覧</div>
+                <button onClick={work_create}>新規作成</button>
+                <button onClick={work_delete}>削除</button>
+                <button onClick={detail_update}>更新</button>
                 <div className={classes.headerright}>
                     <button
                         color="indigo"

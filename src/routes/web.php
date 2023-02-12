@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\WorksController;
+use App\Http\Controllers\DetailsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,13 +20,17 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Practice', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/book',[WorksController::class,'detail_read']);
+Route::post('/make',[WorksController::class,'work_make']);
+Route::patch('/update',[WorksController::class,'detail_update']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

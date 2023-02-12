@@ -16,7 +16,7 @@ export default function () {
             .then((response) => {
                 console.log(response.data);
                 setResponse(response.data);
-                console.log(responses[0]);
+                // console.log(responses[0]);
             })
 
             .catch((error) => console.log(error));

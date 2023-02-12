@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('date');
             $table->integer('color');
             $table->timestamps('published');
-            $table->foreign('work_id')->references('id')->on('works');
+            $table->foreign('work_id')->references('id')->on('works')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

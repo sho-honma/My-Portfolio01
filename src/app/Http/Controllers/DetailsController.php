@@ -7,10 +7,10 @@ use App\Models\Detail;
 
 class DetailsController extends Controller
 {
-    public function detail_make($props){
+    public function detail_make($workid){
         for ($i = 1; $i < 41; $i++) {
             $details = new Detail;
-            $details->work_id = $props->work_id ;
+            $details->work_id = $workid ;
             $details->section_id = $i ;
             $details -> detail_title =  "";
             $details -> description = "";
@@ -20,8 +20,15 @@ class DetailsController extends Controller
             $details ->save();
                 } ;  
     }
-    public function detail_update($props){
-          $cond = ['work_id'=> $props->work_id, 'section_id'=> $props->section_id];
+    // public function detail_delete(Request $request) {
+    //   // $deleteid = $props;
+    //   $details = Detail::where('work_id', 64)->get()->delete();
+    //   // $details->delete();
+    //   return 111;
+    // }
+    public function detail_update(Request $request){
+          
+          $cond = ['work_id'=> $request->work_id, 'section_id'=> $request->section_id];
           $newdata   = Detail::where($cond)->get();
         //   ->update([
         //     'color' => $props->color,
@@ -30,12 +37,12 @@ class DetailsController extends Controller
     // $data = [
     //     'description' => $request->description
     // ];
-          $newdata -> description = $props->description;
+          // $newdata -> description = $props->description;
         //   $newdata->update($data);  
         //   $newdata->save();
         //   $newdata->fill($props->all())->save();
         //   $newdata ->toJson();
-          return ;
+          return 1111;
             
     }
 }

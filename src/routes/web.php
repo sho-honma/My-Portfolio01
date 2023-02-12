@@ -20,14 +20,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+
 
 // Route::get('/book',[WorksController::class,'detail_read']);
 // Route::post('/make',[WorksController::class,'work_make']);

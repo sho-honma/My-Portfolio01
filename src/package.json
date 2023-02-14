@@ -1,8 +1,12 @@
 {
+    "name": "powerframeapp",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "prod": "",
+        "production": ""
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",

@@ -1,32 +1,26 @@
 import { useState } from "react";
 import { Avatar } from "@mantine/core";
-import { Badge } from "@mantine/core";
-import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
+import classes from "./AuthenticatedLayout.module.css";
 
 export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-100">
-            <nav className="bg-white dark:bg-gray-100 border-b border-gray-100 dark:border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen">
+            <nav className=" border-b border-gray-100 dark:border-gray-100">
+                <div className="max-w-10xl    mx-auto mx-autopx-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    {/* <div className="bg-blue-500">
-
-                                        PowerFrame
-                                    </div> */}
-                                    <Badge size="xl" radius="sm">
-                                        PowerFrame
-                                    </Badge>
-                                    {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> */}
+                                <Link href="/" className={classes.link}>
+                                    <h1 className={classes.titlelink}>
+                                        Power Frame
+                                    </h1>
                                 </Link>
                             </div>
 
@@ -35,7 +29,9 @@ export default function Authenticated({ auth, header, children }) {
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
-                                    マイページ
+                                    <div className={classes.sectiontitle}>
+                                        マイページ
+                                    </div>
                                 </NavLink>
                             </div>
                         </div>
@@ -47,12 +43,13 @@ export default function Authenticated({ auth, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-100 bg-white dark:bg-gray-100 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  transition ease-in-out duration-150"
                                             >
                                                 <Avatar
                                                     radius="md"
                                                     // size="lg"
                                                     color="indigo"
+                                                    className={classes.avator}
                                                 >
                                                     {auth.user.name}
                                                 </Avatar>
@@ -97,7 +94,7 @@ export default function Authenticated({ auth, header, children }) {
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md   transition duration-150 ease-in-out"
                             >
                                 <svg
                                     className="h-6 w-6"

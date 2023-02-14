@@ -1,4 +1,20 @@
 .sidebar {
     width: 6%;
     border-right: solid 0.2px rgb(197, 197, 197);
+    border-top: solid 0.2px rgb(197, 197, 197);
+    height: 100vh;
+}
+.group {
+    height: 1%;
+}
+
+.link {
+    font-weight: bold;
+    font-size: 20px;
+}
+.title {
+    font-weight: bold;
+    font-size: 26px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3rem;
 }

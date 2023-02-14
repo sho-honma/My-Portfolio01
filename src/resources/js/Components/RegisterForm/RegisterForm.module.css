@@ -1,5 +1,5 @@
 .buttoncontainer {
-    /* height: 200%; */
+    height: 200%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,6 +11,11 @@
     overflow: hidden;
 }
 
+.important {
+    padding-top: 1.5rem;
+    font-weight: bold;
+    font-size: 20px;
+}
 .button {
     width: 90%;
     height: 90%;
@@ -21,8 +26,14 @@
     justify-content: center;
 }
 .button h2 {
-    width: 80%;
-    height: 50%;
-    /* margin: 0 auto;
-    margin-top: 1.5rem; */
+    font-weight: bold;
+    font-size: 20px;
+}
+.save {
+    color: #ffff;
+    background-color: #2f79f0;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    letter-spacing: 1rem;
+    margin: 0 auto;
 }

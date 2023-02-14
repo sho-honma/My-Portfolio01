@@ -1,0 +1,27 @@
+.link {
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.titlelink {
+    background-color: #29236d;
+    padding-top: 0.5rem;
+    color: #ffff;
+    border-radius: 5px;
+    width: 10rem;
+    height: 100%;
+    font-size: large;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+.sectiontitle {
+    font-size: 20px;
+    letter-spacing: 0.1rem;
+    /* font-weight: bold; */
+}
+.avator {
+    width: 3rem;
+    height: 3rem;
+}

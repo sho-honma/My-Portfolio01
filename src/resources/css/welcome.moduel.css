@@ -1,0 +1,8 @@
+.buttoncontainer {
+    display: flex;
+    width: 100px;
+}
+.button {
+    background-color: #29236d;
+    font-size: 100px;
+}

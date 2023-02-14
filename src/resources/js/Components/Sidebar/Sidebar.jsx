@@ -1,18 +1,7 @@
 import classes from "./Sidebar.module.css";
 import { useState } from "react";
-import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
-
-import {
-    Drawer,
-    Button,
-    Group,
-    Portal,
-    Burger,
-    Modal,
-    useMantineTheme,
-} from "@mantine/core";
-import { useFocusTrap } from "@mantine/hooks";
+import { Drawer, Group, Burger, useMantineTheme } from "@mantine/core";
 export function Sidebar() {
     const [opened, setOpened] = useState(false);
     const title = opened ? "Close navigation" : "Open navigation";
@@ -20,7 +9,7 @@ export function Sidebar() {
 
     return (
         <div className={classes.sidebar}>
-            <Group position="center">
+            <Group position="center" mt="2rem" className={classes.group}>
                 <Burger
                     opened={opened}
                     onClick={() => setOpened((o) => !o)}
@@ -35,7 +24,6 @@ export function Sidebar() {
                 title=""
                 padding="xl"
                 size="17%"
-                // overlayOpacity={0}
                 overlayColor={
                     theme.colorScheme === "dark"
                         ? theme.colors.dark[9]
@@ -44,9 +32,12 @@ export function Sidebar() {
                 overlayOpacity={0.55}
                 overlayBlur={3}
             >
-                <Link href="/">ホーム</Link>
+                <div className={classes.title}>Power Frame</div>
+                <Dropdown.Link href={route("home")} method="get" as="button">
+                    <h2 className={classes.link}>ホーム</h2>
+                </Dropdown.Link>
                 <Dropdown.Link href={route("logout")} method="post" as="button">
-                    ログアウト
+                    <h2 className={classes.link}>ログアウト</h2>
                 </Dropdown.Link>
             </Drawer>
         </div>

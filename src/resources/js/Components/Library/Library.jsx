@@ -1,5 +1,5 @@
 import classes from "./Library.module.css";
-import { useEffect, useState, useMemo, memo } from "react";
+import { useEffect, useState } from "react";
 
 import {
     Button,
@@ -10,65 +10,55 @@ import {
     Group,
     Modal,
     useMantineTheme,
+    TextInput,
 } from "@mantine/core";
 
 export function Library(props) {
     const [opened, SetOpened] = useState(false);
     const [status, Setstatus] = useState(props.status);
-
-    console.log(status);
+    const [next, setNext] = useState(false);
+    const [title, setTitle] = useState("");
     const theme = useMantineTheme();
-    const cards = [
-        {
-            id: 1,
-            img: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
-            title: "今日のご飯",
-            template: "はちのす",
-        },
-        {
-            id: 2,
-            img: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
-            title: "今日のご飯",
-            template: "はちのす",
-        },
-    ];
     const templates = [
         {
             title: "はちのすノート",
-            img: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+            img: "../../sample4.png",
             description:
-                "With Fjord Tours you can explore more of the magical fjordlandscapes with tours and activities on and around the fjords ofNorway",
+                "マンダラートとマインドマップを組み合わせた新しいアイデア発掘ツール。",
             sale: "on sale",
             color: "indigo",
             status: true,
         },
         {
             title: "マンダラート",
-            img: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+            img: "../../sample5.png",
             description:
-                "With Fjord Tours you can explore more of the magical fjordlandscapes with tours and activities on and around the fjords ofNorway",
+                "正方形のマス目の中に目標やテーマを書き込んでアイデアや思考を発展させていく思考ツールです。",
             sale: "coming soon",
             color: "red",
             status: false,
         },
     ];
+    const img = "../../sample4.png";
     const [lists, setLists] = useState([]);
+    const [user, setUser] = useState(0);
     const [datas, setDatas] = useState([]);
+    const [news, setNews] = useState([]);
+    const [id, setId] = useState(0);
     const [updates, setUpdate] = useState([]);
-    const [deletenum, setDeletenum] = useState(0);
-    const [responses, setResponse] = useState([]); // console.log(responses);
+    const [deletenum, setDeletenum] = useState("");
+    const [details, setDetails] = useState([]);
+    const [window, setWindow] = useState(true);
+
     useEffect(() => {
         axios
-            .post("/dashboard/read", {
-                user_id: props.auth.user.id,
-            })
+            .get("/dashboard/read")
             .then(function (response) {
-                setLists(response.data);
-                console.log(lists);
+                setLists(response.data[1]);
+                setUser(response.data[0].id);
             })
             .catch((error) => console.log(error));
-    }, [datas]);
-    // #削除
+    }, [datas, news]);
     const work_delete = (num) => {
         axios
             .post("/dashboard/delete", {
@@ -76,54 +66,53 @@ export function Library(props) {
             })
             .then(function (response) {
                 setDatas(response.data);
-                console.log(datas);
             })
             .catch((error) => console.log(error));
     };
-    // #新規作成
     const work_create = () => {
         axios
             .post("/dashboard/create", {
-                user_id: props.auth.user.id,
-                item_title: "新作",
+                user_id: user,
+                item_title: "not ",
             })
             .then(function (response) {
-                setResponse(response.data);
-                console.log(responses);
+                setNews(response.data);
+                props.setData(response.data);
             })
             .catch((error) => console.log(error));
     };
-    // #編集
+
     const work_edit = (num) => {
+        props.setData(num);
+    };
+    const title_update = () => {
         axios
-            .post("/dashboard/edit", {
-                work_id: num,
+            .patch("/dashboard/title", {
+                work_id: news,
+                item_title: title,
             })
-            .then(function (response) {
-                setResponse(response.data);
-                console.log(responses);
-            })
-            .catch((error) => console.log(error));
+            .then(function (response) {});
     };
     return (
         <div className={classes.Library}>
             <div className={classes.header}>
                 <div className={classes.headerleft}>過去の作品一覧</div>
-                <button onClick={work_create}>新規作成</button>
-                <button onClick={work_delete}>削除</button>
-                <button onClick={detail_update}>更新</button>
                 <div className={classes.headerright}>
-                    <button
+                    <Button
+                        className={classes.headerbutton}
                         color="indigo"
                         size="lg"
-                        onClick={() => SetOpened(true)}
+                        onClick={() => {
+                            SetOpened(true);
+                            work_create();
+                        }}
                     >
                         新規作成
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className={classes.cardcontainer}>
-                {cards.map((card) => {
+                {lists.map((list) => {
                     return (
                         <Card
                             className={classes.card}
@@ -131,43 +120,45 @@ export function Library(props) {
                             p="lg"
                             radius="md"
                             withBorder
-                            key={card.id}
+                            key={list.id}
                         >
                             <Card.Section>
                                 <Image
-                                    src={card.img}
-                                    height={100}
+                                    src={img}
+                                    height={130}
                                     alt="Norway"
                                     classNames={classes.cardimage}
                                 />
                             </Card.Section>
+                            <Badge color="yellow" size="lg" mt="0.5rem">
+                                はちのす
+                            </Badge>
                             <Group position="apart" mt="md" mb="xs">
                                 <Text classNames={classes.cardtitle}>
-                                    {card.title}
+                                    {list.item_title}
                                 </Text>
-                                <Badge color="pink" variant="light">
-                                    {card.template}
-                                </Badge>
                             </Group>
                             <Button
                                 className={classes.editbutton}
-                                variant="light"
-                                color="blue"
                                 fullWidth
-                                mt="md"
+                                color="indigo"
                                 radius="md"
-                                onClick={props.Onstart}
+                                onClick={() => {
+                                    props.Onstart();
+                                    props.setTitle(list.item_title);
+                                    work_edit(list.id);
+                                }}
                             >
                                 編集する
                             </Button>
                             <Button
-                                className={classes.editbutton}
-                                variant="light"
-                                color="red"
+                                className={classes.deletebutton}
                                 fullWidth
-                                mt="md"
                                 radius="md"
-                                onClick={props.Onstart}
+                                color="red"
+                                onClick={() => {
+                                    work_delete(list.id);
+                                }}
                             >
                                 削除する
                             </Button>
@@ -175,69 +166,129 @@ export function Library(props) {
                     );
                 })}
             </div>
-            <Modal
-                centered
-                size="70%"
-                opened={opened}
-                onClose={() => SetOpened(false)}
-                title="テンプレートを選択してください"
-                overlayColor={
-                    theme.colorScheme === "dark"
-                        ? theme.colors.dark[9]
-                        : theme.colors.gray[2]
-                }
-                overlayOpacity={0.55}
-                overlayBlur={3}
-            >
-                <div className={classes.templatecontainer}>
-                    {templates.map((template) => {
-                        return (
-                            <div
-                                className={classes.templatecard}
-                                key={template.title}
-                            >
-                                <Card shadow="sm" p="lg" radius="md" withBorder>
-                                    <Card.Section>
-                                        <Image
-                                            src={template.img}
-                                            height={160}
-                                            alt="Norway"
-                                        />
-                                    </Card.Section>
-                                    <Group position="apart" mt="md" mb="xs">
-                                        <Text weight={500}>
-                                            {template.title}
-                                        </Text>
-                                        <Badge
-                                            color={template.color}
-                                            variant="light"
-                                        >
-                                            {template.sale}
-                                        </Badge>
-                                    </Group>
-                                    <Text size="sm" color="dimmed">
-                                        {template.description}
-                                    </Text>
-                                    {template.status ? (
-                                        <Button
-                                            variant="light"
-                                            color="blue"
-                                            fullWidth
-                                            mt="md"
+            <div>
+                <div>
+                    <Modal
+                        centered
+                        size="70%"
+                        opened={opened}
+                        onClose={() => SetOpened(false)}
+                        title="テンプレートを選択してください"
+                        overlayColor={
+                            theme.colorScheme === "dark"
+                                ? theme.colors.dark[9]
+                                : theme.colors.gray[2]
+                        }
+                        overlayOpacity={0.55}
+                        overlayBlur={3}
+                    >
+                        <div className={classes.templatecontainer}>
+                            {templates.map((template) => {
+                                return (
+                                    <div
+                                        className={classes.templatecard}
+                                        key={template.title}
+                                    >
+                                        <Card
+                                            shadow="sm"
+                                            p="lg"
                                             radius="md"
-                                            onClick={props.Onstart}
+                                            withBorder
                                         >
-                                            はじめる
-                                        </Button>
-                                    ) : (
-                                        <div></div>
-                                    )}
-                                </Card>
-                            </div>
-                        );
-                    })}
+                                            <Card.Section>
+                                                <Image
+                                                    src={template.img}
+                                                    height={160}
+                                                    alt="Norway"
+                                                />
+                                            </Card.Section>
+                                            <Group
+                                                position="apart"
+                                                mt="md"
+                                                mb="xs"
+                                            >
+                                                <Text
+                                                    weight={500}
+                                                    className={
+                                                        classes.templatetitle
+                                                    }
+                                                >
+                                                    {template.title}
+                                                </Text>
+                                                <Badge
+                                                    color={template.color}
+                                                    variant="light"
+                                                >
+                                                    {template.sale}
+                                                </Badge>
+                                            </Group>
+                                            <Text size="sm" color="dimmed">
+                                                {template.description}
+                                            </Text>
+                                            {template.status ? (
+                                                <Button
+                                                    className={
+                                                        classes.startbutton
+                                                    }
+                                                    color="indigo"
+                                                    fullWidth
+                                                    mt="md"
+                                                    radius="md"
+                                                    onClick={() => {
+                                                        // props.Onstart();
+                                                        setWindow(false);
+                                                        SetOpened(false);
+                                                        setNext(true);
+                                                    }}
+                                                >
+                                                    はじめる
+                                                </Button>
+                                            ) : (
+                                                <div></div>
+                                            )}
+                                        </Card>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </Modal>
                 </div>
-            </Modal>
+
+                <div>
+                    <Modal
+                        centered
+                        title="題名を記入してください"
+                        opened={next}
+                        size="40%"
+                        onClose={() => setNext(false)}
+                        overlayColor={
+                            theme.colorScheme === "dark"
+                                ? theme.colors.dark[9]
+                                : theme.colors.gray[2]
+                        }
+                        overlayOpacity={0.55}
+                        overlayBlur={3}
+                    >
+                        <TextInput
+                            placeholder={title}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <Button
+                            className={classes.setbutton}
+                            onClick={() => {
+                                props.Onstart();
+                                setWindow(true);
+                                props.setTitle(title);
+                                title_update();
+                                // work_edit(list.id);
+                            }}
+                        >
+                            はじめる
+                        </Button>
+                    </Modal>
+                </div>
+            </div>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 .Library {
     margin: 0;
     padding: 0;
-    /* width: 94%; */
     height: 100%;
 }
 
@@ -11,7 +10,6 @@
     text-align: center;
     height: 5rem;
     border-top: solid 0.1px rgb(197, 197, 197);
-    background-color: rgb(242, 247, 248);
 }
 .headerleft {
     width: 40%;
@@ -19,6 +17,7 @@
     align-items: center;
     margin-left: 2rem;
     font-size: 30px;
+    font-weight: bolder;
 }
 .headerright {
     width: 40%;
@@ -28,26 +27,33 @@
     align-items: center;
     margin-right: 2rem;
 }
+.headerbutton {
+    background-color: #2f79f0;
+    border-radius: 5px;
+    letter-spacing: 0.1rem;
+}
 .containertitle {
     font-size: 25px;
     margin-left: 2rem;
 }
+.cardtitle {
+    font-weight: bold;
+}
 .cardcontainer {
-    background-color: rgb(242, 247, 248);
     height: 42rem;
     display: flex;
     flex-flow: row wrap;
-    /* justify-content: center; */
-    /* align-content: flex-start; */
-    /* flex-wrap: wrap; */
+}
+.templatetitle {
+    font-size: large;
+    font-weight: bold;
 }
 
 .card {
     width: 16rem;
-    height: 18rem;
+    height: 20rem;
     margin-left: 1.5rem;
     margin-top: 1.5rem;
-    background-color: #ffffff;
 }
 
 .templatecontainer {
@@ -56,6 +62,25 @@
 }
 .templatecard {
     width: 35%;
-
-    /* margin: 5rem */
+}
+.editbutton {
+    background-color: #2f79f0;
+    letter-spacing: 0.3rem;
+    margin-top: 1rem;
+}
+.deletebutton {
+    background-color: rgb(234, 57, 57);
+    letter-spacing: 0.3rem;
+    margin-top: 1rem;
+}
+.startbutton {
+    background-color: #2f79f0;
+    border-radius: 5px;
+    letter-spacing: 0.1rem;
+}
+.setbutton {
+    background-color: #2f79f0;
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
 }

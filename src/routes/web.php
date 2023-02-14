@@ -32,32 +32,23 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');;
+
+
+
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
-    Route::post('/read',[UsersController::class,'work_read'])
-    // Route::post('/read',function () {
-    //         return "hello";
-    //     });
-    // Route::post('/read',function () {
-    //     return "hello";
-    // })
+    Route::get('/read',[UsersController::class,'work_read'])
     ->middleware(['auth', 'verified'])->name('work_read');
     Route::post('/delete',[WorksController::class,'work_delete']);
-    // Route::post('/delete',function () {
-    //             return "hello";
-    //         });
     Route::post('/create',[WorksController::class,'work_make']);
-    Route::post('/update',[DetailsController::class,'detail_update']);
-    // Route::post('/edit',[WorksController::class,'detail_read'])->name('edit');
+    Route::patch('/update',[DetailsController::class,'detail_update']);
+    Route::patch('/title',[WorksController::class,'title_set']);
     Route::post('/edit',[WorksController::class,'detail_read'])->name('edit');
 });
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

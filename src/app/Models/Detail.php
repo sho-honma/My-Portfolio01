@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Detail extends Model
 {
     use HasFactory;
+    protected $fillable = ['color','important','date','description','detail_title'];
 }

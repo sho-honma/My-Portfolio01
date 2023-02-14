@@ -8,7 +8,7 @@ use App\Models\Detail;
 class DetailsController extends Controller
 {
     public function detail_make($workid){
-        for ($i = 1; $i < 41; $i++) {
+        for ($i = 1; $i < 45; $i++) {
             $details = new Detail;
             $details->work_id = $workid ;
             $details->section_id = $i ;
@@ -16,33 +16,21 @@ class DetailsController extends Controller
             $details -> description = "";
             $details -> important =  50;
             $details -> date =  10;
-            $details -> color =  10;
+            $details -> color =  "rgba(184, 223, 224, 1)";
             $details ->save();
                 } ;  
+        
     }
-    // public function detail_delete(Request $request) {
-    //   // $deleteid = $props;
-    //   $details = Detail::where('work_id', 64)->get()->delete();
-    //   // $details->delete();
-    //   return 111;
-    // }
-    public function detail_update(Request $request){
-          
-          $cond = ['work_id'=> $request->work_id, 'section_id'=> $request->section_id];
-          $newdata   = Detail::where($cond)->get();
-        //   ->update([
-        //     'color' => $props->color,
-        // ]);;
-        //   $color= $props->color;
-    // $data = [
-    //     'description' => $request->description
-    // ];
-          // $newdata -> description = $props->description;
-        //   $newdata->update($data);  
-        //   $newdata->save();
-        //   $newdata->fill($props->all())->save();
-        //   $newdata ->toJson();
-          return 1111;
+    public function detail_update(Request $request){  
+          $param = ['work_id'=>$request->work_id, 'section_id'=>$request->section_id];
+          $details = Detail::where($param)->first();
+          $details -> detail_title =  $request->detail_title;
+          $details -> description = $request->description;
+          $details -> important =  $request->important;
+          $details -> date =  $request->date;
+          $details -> color =  $request->color;
+          $details ->save();
+          return $details;
             
     }
 }

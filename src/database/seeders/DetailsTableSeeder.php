@@ -23,8 +23,8 @@ class DetailsTableSeeder extends Seeder
                 'detail_title'=>'eeee',
                 'description' => 'comcom',
                 'important'=>20,
-                'date'=>'111',
-                'color'=>111
+                'date'=>111,
+                'color'=>"rgba(184, 223, 224, 1)"
             ]);
             }   
         for ($i = 1; $i < 41; $i++) {
@@ -35,8 +35,8 @@ class DetailsTableSeeder extends Seeder
                 'detail_title'=>'qqqqq',
                 'description' => 'comcom',
                 'important'=>20,
-                'date'=>'111',
-                'color'=>111
+                'date'=>111,
+                'color'=>"rgba(184, 223, 224, 1)"
             ]);
             }   
             

@@ -17,12 +17,12 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'name' => 'taro',
-            'email' => 'hewwwo@gmail.com',
+            'email' => 'hewwwo@mail.com',
             'password'=>'wwwwwwww'
         ]);
         User::create([
             'name' => 'taro',
-            'email' => 'qqqqwo@gmail.com',
+            'email' => 'qqqqwo@mail.com',
             'password'=>'wwwwwwww'
         ]);
     }
